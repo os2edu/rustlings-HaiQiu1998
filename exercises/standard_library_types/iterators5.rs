@@ -10,8 +10,6 @@
 //
 // Make the code compile and the tests pass.
 
-// I AM NOT DONE
-
 use std::collections::HashMap;
 
 #[derive(Clone, Copy, PartialEq, Eq)]
@@ -32,9 +30,8 @@ fn count_for(map: &HashMap<String, Progress>, value: Progress) -> usize {
 }
 
 fn count_iterator(map: &HashMap<String, Progress>, value: Progress) -> usize {
-    // map is a hashmap with String keys and Progress values.
-    // map = { "variables1": Complete, "from_str": None, ... }
-    todo!();
+    map.iter().fold(0, |acc, (key, val)| if val == &value { acc + 1 } else { acc })
+    
 }
 
 fn count_collection_for(collection: &[HashMap<String, Progress>], value: Progress) -> usize {
@@ -53,7 +50,15 @@ fn count_collection_iterator(collection: &[HashMap<String, Progress>], value: Pr
     // collection is a slice of hashmaps.
     // collection = [{ "variables1": Complete, "from_str": None, ... },
     //     { "variables2": Complete, ... }, ... ]
-    todo!();
+
+    collection.iter().fold(0,|acc, v| acc + v.iter().fold(0, |acc, (key, val)| if val == &value { acc + 1 } else { acc }) )
+    // .iter().fold(0, |acc, (key, val)| if val == &value { acc + 1 } else { acc })
+
+    // let mut count = 0;
+    // for map in collection {
+    //     count += map.iter().fold(0, |acc, (key, val)| if val == &value { acc + 1 } else { acc })
+    // }
+    // count
 }
 
 #[cfg(test)]
